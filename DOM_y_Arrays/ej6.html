@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            display: none;
+        }
+
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- Aqui va el input de busqueda -->
+    </div>
+    <div>
+        <!-- Aqui van las palabras -->
+    </div>
+    <div>
+        <!-- mensaje de aviso si escribe más de una letra -->
+    </div>
+    <script>
+        const palabras=["casa","ordenador","javaScript","calculadora"];
+        const div=document.querySelectorAll("div");
+        const inputLetra=document.createElement("input");
+        inputLetra.setAttribute("type","text");
+        const ul=document.createElement("ul");
+
+        const aviso=document.createElement("p");
+        aviso.textContent="Estás escribiendo más de una letra, sólo se tendrá en cuenta la primera";
+
+
+        function mostrarPalabras(){
+            palabras.forEach(palabra => {
+                const li=document.createElement("li");
+                li.textContent=palabra;
+                ul.append(li);
+            });
+        }
+
+        function buscar_palabras(){
+            inputLetra.addEventListener("input",(e)=>{
+                let letra=e.target.value.trim().toLowerCase();
+                let todosLi=document.querySelectorAll("li");
+                if(letra.length<=1){
+                    todosLi.forEach(li=>{
+                        if(li.textContent.toLowerCase().startsWith(letra)){
+                            li.style.display="block";
+                        }else{
+                            li.style.display="none";
+                        }
+                    })
+                    aviso.style.display="none";
+                }else{
+                    aviso.style.display="block";
+
+                }
+            })
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            
+            
+
+
+            mostrarPalabras();
+            buscar_palabras();
+            div[0].append(inputLetra);
+            div[1].append(ul);
+            div[2].append(aviso);
+        })
+    </script>
+</body>
+</html>
