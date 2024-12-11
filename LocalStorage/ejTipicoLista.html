@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div>
+        <!-- Aqui va el form -->
+    </div>
+    <div>
+        <!-- Aqui va lista -->
+    </div>
+
+    <script>
+        const div=document.querySelectorAll("div");
+        const inputForm=document.createElement("input");
+        inputForm.setAttribute("type","text");
+        const button=document.createElement("button");
+        button.textContent="Enviar";
+        const ul=document.createElement("ul");
+        const almacen=JSON.parse(localStorage.getItem("valores"))||[];
+
+        function limpiezaInput(){
+            inputForm.value="";
+            inputForm.focus();
+        }
+
+        function insertar_datos(){
+            ul.textContent="";//Duplicidad datos
+            //Pintar los datos del array, si hay algo en el local storage, se cargan los datos en el array y se pintan
+            almacen.forEach((element,index) => {
+                let li=document.createElement("li");
+                li.textContent=element;
+
+                //Funcionalidad de borrar
+                const borrarBtn=document.createElement("button");
+                borrarBtn.textContent="X";
+                li.append(borrarBtn);
+
+                borrarBtn.addEventListener("click",()=>{
+                    li.remove();//Borrar sólo de forma visible
+                    //Borrar del localStorage
+                    actualizar_array(index);
+                })
+
+                ul.append(li);
+            });
+            
+        }
+
+        function actualizar_array(posicion){
+            localStorage.clear();
+
+            almacen.splice(posicion,1);//Se elimina el contenido de esa posición del array
+
+            localStorage.setItem("valores",JSON.stringify(almacen));
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            div[0].append(inputForm,button);
+
+            //Pintar lo que haya en el localStorage, si hay algo
+            if(almacen.length!=0){
+                almacen.forEach(element => {
+                    insertar_datos(element);
+                });
+            }
+
+            div[1].append(ul);
+
+
+            button.addEventListener("click",()=>{
+                let valorInput=inputForm.value.trim();
+
+                if(valorInput!=""){
+                    //Añadir al array
+                    almacen.push(valorInput);
+
+                    //Insertar los datos a partir del array(en la función)
+                    insertar_datos(valorInput);
+
+                    
+                    //Añadir al localStorage
+                    localStorage.setItem("valores",JSON.stringify(almacen));
+
+
+                    limpiezaInput();
+                }
+            })
+
+            
+
+        })
+    </script>
+</body>
+</html>
