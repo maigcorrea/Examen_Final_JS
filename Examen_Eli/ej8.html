@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: solid 1px black;
+        }
+
+        td{
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const datos = ["Nombre", "Apellidos", "Email"];
+        const estado = ["Soltero", "Casado", "Divorciado"];
+        const hobby = [ "Deportes", "Cine", "Viajes"];
+
+        //Mostrar array datos como lista no ordenada
+        const ul=document.createElement("ul");
+        datos.forEach(element => {
+            const li=document.createElement("li");
+            li.textContent=element;
+            ul.append(li);
+        });
+
+        document.body.append(ul);
+
+        //Mostrar array estado como select
+        const select=document.createElement("select");
+        select.setAttribute("name","estado");
+        const opDefault=document.createElement("option");
+        opDefault.setAttribute("disabled","true");
+        opDefault.setAttribute("selected","true");
+        opDefault.textContent="Selecciona un estado";
+        select.append(opDefault);
+
+        estado.forEach(element => {
+            const option=document.createElement("option");
+            option.textContent=element;
+            select.append(option);
+        });
+        document.body.append(select);
+
+        //Mostrar array hobies como tabla de una sola fila
+        document.write("<br><br>");
+        const table=document.createElement("table");
+        const tr=document.createElement("tr");
+
+        hobby.forEach(element => {
+            const td=document.createElement("td");
+            td.textContent=element;
+            tr.append(td);
+        });
+
+        table.append(tr);
+        document.body.append(table);
+
+        //Mostrar array hobies como tabla de una sola columna
+        document.write("<br><br>");
+        const table2=document.createElement("table");
+
+        hobby.forEach(element => {
+            const tr2=document.createElement("tr");
+            const td2=document.createElement("td");
+            td2.textContent=element;
+            tr2.append(td2);
+            table2.append(tr2);
+        });
+
+        document.body.append(table2);
+    </script>
+</body>
+</html>
