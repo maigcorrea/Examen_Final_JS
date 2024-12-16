@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <input type="text" name="nombre" class="nombre" id="" placeholder="nombre"><br>
+        <input type="text" name="email" class="email" id="" placeholder="correo Electrónico"><br>
+        <input type="text" name="mensaje" class="mensaje" id="" placeholder="mensaje"><br>
+
+        <button type="submit" class="enviar" name="env">Enviar</button>
+    </form>
+    <div>
+        <ul>
+
+        </ul>
+    </div>
+    <script>
+            const form=document.querySelector("form");
+            const nombre=document.querySelector(".nombre");
+            const email=document.querySelector(".email");
+            const mensaje=document.querySelector(".mensaje");
+            const enviar=document.querySelector(".enviar");
+            let datos=JSON.parse(localStorage.getItem("datos"))||[];//Si hay datos en el localStorage se cargan en el array, sino, se deja vacio
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            //Mostrar los datos una vez se recarga la página si están almacenados en el localStorage
+            if(datos.length>=1){
+                const ul=document.querySelector("ul");
+                datos.forEach(dato => {
+                   const li=document.createElement("li");
+                   li.textContent=dato;
+                   ul.append(li); 
+                });
+            }
+
+            //Evento para cuando un formulario se ha enviado
+            form.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                
+
+                if(nombre.value!="" || email.value!="" || mensaje.value!=""){
+                    datos.push(nombre.value,email.value,mensaje.value);
+                    
+                    localStorage.setItem("datos",JSON.stringify(datos));
+                    document.write("<h2>Felicidades. Los datos se han guardado</h2>");
+                }else{
+                    console.log("Error, por favor introduce los datos");
+                }
+            })
+        })
+    </script>
+</body>
+</html>
