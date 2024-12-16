@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const usuarios = [
+            { nombre: "Juan", edad: 25 },
+            { nombre: "María", edad: 30 },
+            { nombre: "Luis", edad: 22 },
+            { nombre: "Ana", edad: 28 },
+            { nombre: "Carlos", edad: 35 }
+        ];
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            nombres=usuarios.map(usuario=>usuario.nombre);
+            edades=usuarios.map(usuario=>usuario.edad);
+
+            console.log(nombres);
+            console.log(edades);
+        })
+    </script>
+</body>
+</html>
