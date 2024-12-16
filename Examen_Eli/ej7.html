@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const lista=["Manzana","Pera","Kiwi","Cereza"];
+        const listaAñadir=["Uvas","Plátano","Naranja","Sandía"];
+        const ul=document.createElement("ul");
+        const agregar=document.createElement("button");
+        agregar.textContent="Agregar";
+        const eliminar=document.createElement("button");
+        eliminar.textContent="Eliminar";
+
+        function crearLista(){
+            lista.forEach(element => {
+                const li=document.createElement("li");
+                li.textContent=element;
+                ul.append(li);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            crearLista();
+
+            eliminar.addEventListener("click",()=>{
+                //Actualizar array
+                lista.splice(lista.length-1,1);
+                //Eliminar lista
+                ul.textContent="";
+                //crear lista de nuevo
+                crearLista();
+            })
+
+
+
+            agregar.addEventListener("click",()=>{
+                //Actualizar array
+                if(listaAñadir.length>=1){
+                    nuevoElemento=listaAñadir.shift();
+                    lista.push(nuevoElemento);
+                }else{
+                    document.write("<p>No hay más elementos para añadir</p>");
+                }
+                
+                //Eliminar lista
+                ul.textContent="";
+                //Crear lista de nuevo
+                crearLista();
+            })
+
+            document.body.append(ul,eliminar,agregar);
+        })
+    </script>
+</body>
+</html>
