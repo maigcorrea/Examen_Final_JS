@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="buscador" type="text" placeholder="Buscar...">
+    <ul id="filterList">
+        <li>Manzana</li>
+        <li>Plátano</li>
+        <li>Cereza</li>
+        <li>Zanahoria</li>
+    </ul>
+
+    <script>
+        const buscador=document.querySelector("input");
+        const li=document.querySelectorAll("li");
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            buscador.addEventListener("input",(e)=>{
+                $valor=e.target.value.toLocaleLowerCase().trim();
+                console.log($valor);
+                li.forEach(element => {
+                    if(element.textContent.toLocaleLowerCase().trim().includes($valor)){
+                        element.style.display="block";
+                        
+                    }else{
+                        element.style.display="none";
+                    }
+                });
+            })
+        })
+    </script>
+</body>
+</html>
