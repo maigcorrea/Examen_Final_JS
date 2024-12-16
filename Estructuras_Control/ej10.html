@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <input type="text" name="nombre" class="nombre" id="" placeholder="Nombre"><br>
+        <input type="text" name="edad" class="edad" id="" placeholder="Edad"><br>
+
+        <button type="submit" name="env" class="enviar">Enviar</button>
+    </form>
+    
+    <script>
+        const form=document.querySelector("form");
+        const nombre=document.querySelector(".nombre");
+        const edad=document.querySelector(".edad");
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            form.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                document.body.innerHTML=`
+                    <table>
+                        <tr><th>Nombre</th><th>Edad</th></tr>
+                        <tr><td>${nombre.value}</td><td>${edad.value}</td></tr>
+                    </table>
+                `;
+            })
+        })
+    </script>
+</body>
+</html>
