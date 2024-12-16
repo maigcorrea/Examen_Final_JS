@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="fondo" id="">
+
+    </select>
+    <script>
+        const colores=["red","blue","green","yellow"];
+        const select=document.querySelector("select");
+        let colorSeleccionado=localStorage.getItem("color")||"white";
+
+        colores.forEach(color => {
+            const option=document.createElement("option");
+            option.setAttribute=color;
+            option.textContent=color;
+            select.append(option);
+        });
+
+
+        document.body.style.backgroundColor=colorSeleccionado;
+        select.addEventListener("change",()=>{
+            colorSeleccionado=select.value.trim();
+            localStorage.setItem("color",colorSeleccionado);
+
+            document.body.style.backgroundColor=colorSeleccionado;
+
+        })
+        
+    </script>
+</body>
+</html>
