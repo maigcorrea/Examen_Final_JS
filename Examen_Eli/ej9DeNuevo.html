@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const url="https://www.themealdb.com/api/json/v1/1/categories.php";
+        const ul=document.createElement("ul");
+        const img=document.createElement("img");
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            fetch(url)
+            .then(respuesta=>respuesta.json())
+            .then(datos=>{
+                datos.categories.forEach(element => {
+                    const li=document.createElement("li");
+                    li.textContent=element.strCategory;
+                    //Mostrar imagen
+                    li.addEventListener("click",()=>{
+                        img.setAttribute("src",element.strCategoryThumb);
+                    })
+                    ul.append(li);
+                });
+            })
+
+            document.body.append(ul,img);
+        })
+    </script>
+</body>
+</html>
