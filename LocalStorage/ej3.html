@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .destacar{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const input=document.createElement("input");
+        input.setAttribute("type","text");
+        const button=document.createElement("button");
+        button.textContent="Agregar tarea";
+        const ul=document.createElement("ul");
+        tareas=JSON.parse(localStorage.getItem("tareas"))||[];//Si el localStorage está lleno, se meten los valores de nuevo en array, sino, se inicializa vacío
+
+
+        //FUNCIONES
+        function rellenarLista(){
+            ul.textContent="";//Evitar duplicidad
+
+            tareas.forEach((element,index) => {
+                const li=document.createElement("li");
+                li.textContent=element;
+                //Añadir funcionalidad de destacar
+                li.addEventListener("click",()=>{
+                    li.classList.toggle("destacar");
+                })
+                //Añadir funcionalidad de borrar tarea
+                const eliminar=document.createElement("button");
+                eliminar.textContent="X";
+                eliminar.addEventListener("click",()=>{
+                    //Eliminar de lista visible
+                    li.remove();
+                    actualizarArray(index);
+                })
+
+                li.append(eliminar);
+                ul.append(li);
+            });
+        }
+
+        function actualizarArray(index){
+            //Actualizar array
+            tareas.splice(index,1);
+            //Vaciar localStorage
+            localStorage.clear();
+            //Rellenar localStorage
+            localStorage.setItem("tareas",JSON.stringify(tareas));
+        }
+
+
+        function limpiar(){
+            input.value="";
+            input.focus();
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            
+            //Crear la lista
+            rellenarLista();
+
+            button.addEventListener("click",()=>{
+                let valor=input.value.trim();
+                if(valor!=""){
+                    tareas.push(valor);
+
+                    //Meter el array en localStorage
+                    localStorage.setItem("tareas",JSON.stringify(tareas));
+
+                    //Rellenar lista de nuevo
+                    rellenarLista()
+
+
+                }else{
+                    alert("El campo input está vacío");
+                }
+
+                limpiar();
+            })
+
+            document.body.append(input,button,ul);
+        })
+    </script>
+</body>
+</html>
