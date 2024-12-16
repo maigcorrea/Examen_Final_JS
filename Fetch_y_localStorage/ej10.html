@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const url="https://jsonplaceholder.typicode.com/users";
+        const ul=document.createElement("ul");
+        const arr=JSON.parse(localStorage.getItem("nombres"))||[];
+
+
+        function crearLista(){
+            arr.forEach(element => {
+                const li=document.createElement("li");
+                li.textContent=element;
+                ul.append(li);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            if(arr.length>=1){
+                crearLista();
+            }else{
+                fetch(url)
+                .then(respuesta=>respuesta.json())
+                .then(datos=>{
+                    datos.forEach(dato => {
+                        arr.push(dato.name);
+                    });
+
+                    localStorage.setItem("nombres",JSON.stringify(arr));
+
+                    crearLista();
+                })
+            }
+
+            document.body.append(ul);
+            
+
+        })
+    </script>
+</body>
+</html>
