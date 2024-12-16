@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let cont=0;
+        const button=document.createElement("button");
+        button.textContent="Click";
+        const span=document.createElement("sepan");
+        span.textContent=cont;
+
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            button.addEventListener("click",()=>{
+                cont=cont+1;
+                span.textContent=cont;
+            })
+
+            document.body.append(span,button);
+        })
+    </script>
+</body>
+</html>

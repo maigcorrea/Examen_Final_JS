@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            overflow: hidden;
+        }
+
+        img{
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const div=document.createElement("div");
+        const img=document.createElement("img");
+        img.setAttribute("src","https://pixabay.com/static/uploads/photo/2013/12/12/03/09/kitten-227011_960_720.jpg")
+        const ampliar=document.createElement("button");
+        ampliar.textContent="Ampliar";
+        const reducir=document.createElement("button");
+        reducir.textContent="Reducir";
+        let escala=1;
+
+        document.addEventListener("DOMContentLoaded",()=>{
+
+            ampliar.addEventListener("click",()=>{
+                escala+=0.5;
+                img.style.scale=escala;
+            })
+
+            reducir.addEventListener("click",()=>{
+                escala-=0.5;
+                img.style.scale=escala;
+            })
+            div.append(img);
+            document.body.append(div,ampliar,reducir);
+        })
+    </script>
+</body>
+</html>
