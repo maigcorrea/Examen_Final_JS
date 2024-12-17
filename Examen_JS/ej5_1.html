@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr=["Elemento 1","Elemento 2","Elemento 3"];
+
+        const ul=document.createElement("ul");
+        const button=document.createElement("button");
+        button.textContent="Eliminar";
+
+        const mensaje=document.createElement("p");
+
+        function llenarLista(){
+            arr.forEach(element => {
+                const li=document.createElement("li");
+                li.textContent=element;
+                ul.append(li);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            llenarLista();
+
+            button.addEventListener("click",()=>{
+                //Actualizar array
+                arr.pop()
+                //Vaciar lista
+                ul.textContent="";
+                //Rellenar lista de nuevo
+                llenarLista();
+
+                //Si el array queda vacío, desabilitar botón y mostrar mensaje
+                if(arr.length<1){
+                    mensaje.textContent="No hay más elementos para eliminar";
+                    button.setAttribute("disabled","true");
+                }
+            })
+
+            
+            document.body.prepend(mensaje);
+            document.body.append(ul,button);
+        })
+    </script>
+</body>
+</html>

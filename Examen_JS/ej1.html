@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const frutas=["Manzana","Cereza","Sandía","Naranja"];
+        const ul=document.createElement("ul");
+
+
+        document.addEventListener("DOMContentLoaded",()=>{
+
+            frutas.forEach(fruta => {
+                const li=document.createElement("li");
+                li.textContent=fruta;
+                ul.append(li);
+            });
+
+            document.body.append(ul);
+        })
+    </script>
+</body>
+</html>

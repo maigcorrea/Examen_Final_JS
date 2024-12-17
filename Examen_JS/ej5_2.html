@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form" action="#" method="post">
+        <input type="text" class="nombre"><br>
+        <button type="submit" class="enviar">Enviar</button>
+    </form>
+
+    <script>
+
+        const form=document.querySelector(".form");
+        const nombre=document.querySelector(".nombre");
+        const button=document.querySelector(".enviar");
+        const usuario=localStorage.getItem("nombre")||"";
+        const p=document.createElement("p");
+
+
+        
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            if(usuario!=""){
+                p.textContent=usuario;
+            }
+
+            form.addEventListener("submit",()=>{
+                let valor=nombre.value.trim();
+
+                if(valor!=""){
+                    console.log(valor);
+                    localStorage.setItem("nombre",valor);
+
+                }else{
+                    alert("El campo está vacío, ingrese un nombre");
+                }
+            })
+
+            document.body.append(p);
+        })
+        
+    </script>
+</body>
+</html>

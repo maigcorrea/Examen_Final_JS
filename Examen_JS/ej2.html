@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        const input=document.createElement("input");
+        input.setAttribute("type","text");
+        input.setAttribute("placeholder","Indica un número");
+        const button=document.createElement("button");
+        button.textContent="Enviar";
+
+
+        const select=document.createElement("select");
+        select.setAttribute("name","numero");
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            
+
+            button.addEventListener("click",()=>{
+                let valor=input.value.trim();
+                select.textContent="";//Para evitar duplicados
+
+                for (let i = 0; i <= valor; i++) {
+                    const option = document.createElement("option");
+                    option.setAttribute("value",i);
+                    option.textContent=i;
+                    select.append(option);
+                }
+                document.body.append(select);
+            })
+
+            document.body.append(input,button);
+        })
+
+    </script>
+</body>
+</html>
